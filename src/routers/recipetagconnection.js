@@ -28,24 +28,19 @@ router.post('/api/user/recipe/:recipe_id/tags', auth, async (req, res) => {
 })
 
 
-router.delete('/api/user/recipe/:recipe_id/tags', auth, async (req, res) => {
-    
-    recipe_id = req.params.recipe_id
-    console.log(req.body);
-    for(let i=0;i<req.body.length;i++){
-        try {
-            const connection = await RecipeTagConnection.findOneAndDelete({tag: req.body[i].tag,recipe: recipe_id})
-
-            if (!connection) {
-                res.status(404).send()
-            }
-
-            
-        } catch (e) {
-           return res.status(500).send()
+router.delete('/api/user/recipe/:recipe_id/tags/:tag_id', auth, async (req, res) => {
+    recipe_id = req.params.recipe_id;
+    tag_id = req.params.tag_id;
+    try {
+        const connection = await RecipeTagConnection.findOneAndDelete({tag: tag_id, recipe: recipe_id});
+        if (!connection) {
+            res.status(404).send();
         }
+
+        res.status(200).send({success: true});
+    } catch (e) {
+       return res.status(500).send();
     }
-    res.status(200).send({success: true})
-})
+});
 
 module.exports = router
