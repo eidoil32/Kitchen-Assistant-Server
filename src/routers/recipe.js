@@ -61,9 +61,9 @@ router.post('/api/user/recipes/add/complete', auth, async(req, res) => {
     let tags = JSON.parse(req.body.tags);
 
     try {
-        methods.addFew(Instruction, instructions, recipe_id);
-        methods.addFew(Ingridient, ingredients, recipe_id);
-        methods.addFewTags(Tag, RecipeTagConnection, tags, recipe_id);
+        await methods.addFew(Instruction, instructions, recipe_id);
+        await methods.addFew(Ingridient, ingredients, recipe_id);
+        await methods.addFewTags(Tag, RecipeTagConnection, tags, recipe_id);
         await Recipe.updateTotalTime(req.body.recipe_id);
         res.status(200).send(req.body);
     } catch (error) {
