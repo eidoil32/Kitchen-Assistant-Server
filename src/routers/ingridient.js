@@ -10,8 +10,8 @@ const getFew = require('../helper/methods').getFew
 const router = new express.Router()
 router.post('/api/user/recipe/:recipe_id/ingridients',auth,async(req,res)=>{  // need to make this code reusble later
     try {
-        await addFew(Ingridient,req.body,{owner:req.params.recipe_id})
-        res.status(201).send({success: true})
+        await addFew(Ingridient, req.body.ingredients, {owner: req.params.recipe_id});
+        res.status(200).send({success: true})
     } catch (error) {
         res.status(400).send({error:error.toString()})
     }

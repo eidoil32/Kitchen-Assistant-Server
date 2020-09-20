@@ -4,19 +4,12 @@ const auth = require('../middlefunctions/auth')
 const Instruction = require('../models/instruction')
 const router = new express.Router()
 
-router.post('/api/user/recipe/:recipe_id/instructions',auth,async(req,res)=>{  
-    for(let i=0;i<req.body.length;i++){
-        const instruction = new Instruction({...req.body[i], owner:req.params.recipe_id})
-        try {
-            await instruction.save()
-        } catch (e) {
-            return res.status(400).send(e)
-        }
-    }
-    
-    const time = await Recipe.updateTotalTime(req.params.recipe_id)
-    res.status(201).send({time})
-})
+router.post('/api/user/recipe/:recipe_id/instructions', auth, async(req, res) => {
+    await addFew(Instruction, req.body.instructions, {owner: req.params.recipe_id}); 
+    const time = await Recipe.updateTotalTime(req.params.recipe_id);
+    res.status(200).send({time});
+});
+
 router.get('/api/user/recipe/:recipe_id/instructions', auth, async (req, res) => {
     try {
         const recipe = await Recipe.findById(req.params.recipe_id)
