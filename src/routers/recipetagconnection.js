@@ -24,7 +24,7 @@ router.post('/api/user/recipe/:recipe_id/tags', auth, async (req, res) => {
             return res.status(400).send(e)
         }
     }
-    res.status(201).send('succes')
+    res.status(201).send({success: true})
 })
 
 
@@ -44,7 +44,7 @@ router.delete('/api/user/recipe/:recipe_id/tags', auth, async (req, res) => {
            return res.status(500).send()
         }
     }
-    res.send('succes')
+    res.send({success: true})
 })
 
 module.exports = router

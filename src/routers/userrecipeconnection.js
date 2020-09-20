@@ -16,7 +16,7 @@ router.post('/api/community/recipe/:recipe_id', auth, async (req, res) => {
     try {
         await userRecipeConnection.save()
         
-        res.status(201).send('succes')
+        res.status(201).send({success: true})
     } catch (e) {
         res.status(400).send(e)
     }
@@ -59,7 +59,7 @@ router.delete('/api/user/recipe/:recipe_id/connection', auth, async (req, res) =
             res.status(404).send()
         }
 
-        res.send('succes')
+        res.send({success: true})
     } catch (e) {
         res.status(500).send()
     }

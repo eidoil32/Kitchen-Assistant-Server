@@ -11,7 +11,7 @@ const router = new express.Router()
 router.post('/api/user/recipe/:recipe_id/ingridients',auth,async(req,res)=>{  // need to make this code reusble later
     try {
         await addFew(Ingridient,req.body,{owner:req.params.recipe_id})
-        res.status(201).send('succes')
+        res.status(201).send({success: true})
     } catch (error) {
         res.status(400).send({error:error.toString()})
     }
@@ -108,7 +108,7 @@ router.patch('/api/user/recipe/:recipe_id/ingridients/:ingridient_id', auth, asy
 router.delete('/api/user/recipe/:recipe_id/ingridients/:ingridient_id', auth, async (req, res) => {
     try {
         await remove(Ingridient,{ _id: req.params.ingridient_id, owner: req.params.recipe_id})
-        res.status(200).send('succes')
+        res.status(200).send({success: true})
     } catch (error) {
         res.status(400).send({error:error.toString()})
     }
