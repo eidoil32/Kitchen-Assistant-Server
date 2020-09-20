@@ -31,6 +31,7 @@ router.post('/api/user/recipe/:recipe_id/tags', auth, async (req, res) => {
 router.delete('/api/user/recipe/:recipe_id/tags', auth, async (req, res) => {
     
     recipe_id = req.params.recipe_id
+    console.log(req.body);
     for(let i=0;i<req.body.length;i++){
         try {
             const connection = await RecipeTagConnection.findOneAndDelete({tag: req.body[i].tag,recipe: recipe_id})
