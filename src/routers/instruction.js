@@ -2,6 +2,7 @@ const express = require('express')
 const Recipe = require('../models/recipe')
 const auth = require('../middlefunctions/auth')
 const Instruction = require('../models/instruction')
+const addFew = require('../helper/methods').addFew
 const router = new express.Router()
 
 router.post('/api/user/recipe/:recipe_id/instructions', auth, async(req, res) => {
