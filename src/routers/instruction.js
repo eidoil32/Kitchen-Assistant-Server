@@ -6,7 +6,7 @@ const addFew = require('../helper/methods').addFew
 const router = new express.Router()
 
 router.post('/api/user/recipe/:recipe_id/instructions', auth, async(req, res) => {
-    await addFew(Instruction, req.body.instructions, {owner: req.params.recipe_id}); 
+    await addFew(Instruction, JSON.parse(req.body.instructions), {owner: req.params.recipe_id}); 
     const time = await Recipe.updateTotalTime(req.params.recipe_id);
     res.status(200).send({time});
 });

@@ -8,14 +8,17 @@ const remove = require('../helper/methods').remove
 const getOne = require('../helper/methods').getOne
 const getFew = require('../helper/methods').getFew
 const router = new express.Router()
+
+
 router.post('/api/user/recipe/:recipe_id/ingridients',auth,async(req,res)=>{  // need to make this code reusble later
     try {
-        await addFew(Ingridient, req.body.ingredients, {owner: req.params.recipe_id});
+        await addFew(Ingridient, JSON.parse(req.body.ingredients), {owner: req.params.recipe_id});
         res.status(200).send({success: true})
     } catch (error) {
         res.status(400).send({error:error.toString()})
     }
-})
+});
+
     // for(let i=0;i<req.body.length;i++){
     //     const ingridient = new Ingridient({...req.body[i], owner:req.params.recipe_id})
     //     try {
