@@ -8,7 +8,8 @@ const router = new express.Router()
 router.post('/api/user/recipe/:recipe_id/create/tags',auth, async(req,res)=>{
    
     const recipe_id = req.params.recipe_id
-    console.log(req.body);
+    console.log(req.body.length);
+
     for(let i=0;i<req.body.length;i++){
         
         try {
